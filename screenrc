@@ -1,0 +1,72 @@
+# ~/.screenrc
+
+# main options
+escape ^za
+altscreen on
+attrcolor b ".I"
+autodetach on
+bell_msg '^Gbell in window %n...'
+bufferfile "$HOME/.screen/exchange"
+deflogin on
+defbce on
+defflow off
+defshell $SHELL
+defscrollback 5000
+defutf8 on
+encoding UTF-8
+hardcopydir "$HOME/.screen/hardcopy"
+nonblock on
+setenv LC_CTYPE en_US.UTF-8
+shelltitle '/ |bash'
+startup_message off
+term xterm-256color
+vbell off
+
+# display settings
+sorendition '+b kG'
+hardstatus alwayslastline "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+
+# open environment-specific apps
+source "$SCREEN_CONF_DIR/$SCREEN_CONF"
+
+# terminfo * k1=\EOP
+# terminfo * k2=\EOQ
+# terminfo * k3=\EOR
+# terminfo * k4=\EOS
+# terminfo * k5=\E[15~
+# terminfo * k6=\E[17~
+# terminfo * k7=\E[18~
+# terminfo * k8=\E[19~
+# terminfo * k9=\E[20~
+# terminfo * F1=\E[23~
+# terminfo * F2=\E[24~
+
+# keybindings
+# F-keys seem to work well in both gnome-terminal and tty consoles
+bindkey -k k2 title             # F2, rename a window
+bindkey -k k3 screen		# F3, create new window
+bindkey -k k4 copy		# F4, copy/scrollback mode
+bindkey -k k6 detach		# F5, detach from this session
+bindkey -k k9 lockscreen	# F6, lock this terminal
+bindkey -k F1 prev		# F11, prev and next, like emacs cyle buffer
+bindkey -k F2 next		# F12, next window
+
+# remove some stupid / dangerous key bindings
+bind ^k
+bind ^\
+
+# make them better
+bind Q quit
+bind K kill
+bind } history
+
+# find the nearest shell
+bind s select bash 
+
+# make scroll work
+termcapinfo rxvt-256color ti@:te@
+termcapinfo xterm-256color ti@:te@
+
+# make colors work
+termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo rxvt-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
